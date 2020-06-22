@@ -1,0 +1,11 @@
+.note-list {
+  padding: 2rem;
+  grid-area: sidebar;
+  background-color: #000;
+  color: #fff;
+}
+
+.note-list-item {
+  padding: 1rem 0;
+  border-bottom: 1px #ccc solid;
+}
