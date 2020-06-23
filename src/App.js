@@ -5,27 +5,28 @@ import NoteEditor from "./components/NoteEditor";
 import "./App.css";
 
 function App() {
-  const tempNote = [
-    { key: 1, title: "my note", content: "my note1" },
-    { key: 2, title: "my 2 note", content: "my note 2" },
+  const initialState = JSON.parse(window.localStorage.getItem("notes")) || [
+    { createdOn: new Date(), title: "Drat", content: "draft" },
   ];
-  const [notes, setNotes] = useState(JSON.parse(window.localStorage.getItem("notes")));
+  const [notes, setNotes] = useState(initialState);
+  const [noteIndex, setNoteIndex] = useState(0);
+
   const newNote = () => {
-    const temp = notes;
+    const temp = [...notes];
     const newNote = { createOn: new Date(), title: "New note", content: "new note" };
     temp.push(newNote);
-    console.log(temp);
     setNotes(temp);
   };
+
   useEffect(() => {
-    window.localStorage.setItem("notes", JSON.stringify(tempNote));
+    window.localStorage.setItem("notes", JSON.stringify(notes));
     console.log(window.localStorage);
   }, [notes]);
   return (
     <div className="App">
       <div className="note">
-        <NoteList notes={notes} />
-        <NoteEditor />
+        <NoteList notes={notes} onSelect={index => setNoteIndex(index)} />
+        <NoteEditor note={notes[noteIndex]} />
         <div className="button-add" onClick={() => newNote()}>
           <Plus size={36} />
         </div>

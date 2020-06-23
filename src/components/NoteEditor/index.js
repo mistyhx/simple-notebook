@@ -1,11 +1,11 @@
 import React from "react";
 import "./index.css";
 
-const NoteEditor = () => {
+const NoteEditor = ({ note }) => {
   return (
     <div className="note-editor">
-      <h1>Javascript Fundamental</h1>
-      <div className="content">content</div>
+      <h1>{note.title}</h1>
+      <div className="content">{note.content}</div>
     </div>
   );
 };

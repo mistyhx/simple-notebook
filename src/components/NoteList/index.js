@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./index.css";
 
-const NoteList = ({ notes }) => {
+const NoteList = ({ notes, onSelect }) => {
   const [filterednotes, setFilterednotes] = useState(notes);
   const [keyword, setKeyword] = useState("");
   const filterNote = keyword => {
@@ -13,11 +13,12 @@ const NoteList = ({ notes }) => {
       setFilterednotes(notes);
     }
   };
+
   return (
     <div className="note-list">
       <input type="text" placeholder="Search Note..." value={keyword} onChange={e => filterNote(e.target.value)} />
       {filterednotes.map((item, index) => (
-        <div key={index} className="note-list-item">
+        <div key={index} className="note-list-item" onClick={() => onSelect(index)}>
           <h4>{item.title}</h4>
           <span>{item.content.substring(0, 30)}</span>
         </div>
