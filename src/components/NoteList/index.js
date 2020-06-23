@@ -9,6 +9,7 @@ const NoteList = () => {
         <h4>Javascipt fundamental</h4>
         <span>After resolving all sds ..</span>
       </div>
+      <div>+</div>
     </div>
   );
 };
