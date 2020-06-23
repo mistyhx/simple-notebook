@@ -1,4 +1,26 @@
 .note-editor {
   padding: 2rem;
   grid-area: main;
+  position: relative;
+}
+
+.note-editor-footer {
+  position: absolute;
+  bottom: 1rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  border-top: 1px rgba(0, 0, 0, 0.1) solid;
+  padding-top: 1rem;
+  width: 90%;
+  opacity: 0.6;
+}
+
+.action-button-icon {
+  padding: 0 0.5rem;
+  cursor: pointer;
+}
+
+.action-button-icon:hover {
+  opacity: 0.6;
 }

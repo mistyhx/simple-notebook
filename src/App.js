@@ -6,14 +6,14 @@ import "./App.css";
 
 function App() {
   const initialState = JSON.parse(window.localStorage.getItem("notes")) || [
-    { createdOn: new Date(), title: "Drat", content: "draft" },
+    { createdOn: new Date(), title: "Drat", content: "draft", edit: false },
   ];
   const [notes, setNotes] = useState(initialState);
   const [noteIndex, setNoteIndex] = useState(0);
 
   const newNote = () => {
     const temp = [...notes];
-    const newNote = { createOn: new Date(), title: "New note", content: "new note" };
+    const newNote = { createOn: new Date(), title: "New note", content: "new note", edit: false };
     temp.push(newNote);
     setNotes(temp);
   };
