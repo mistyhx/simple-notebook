@@ -1,14 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
 import "./index.css";
 
-const NoteList = () => {
+const NoteList = ({ notes }) => {
+  const [filterednotes, setFilterednotes] = useState(notes);
+  const [keyword, setKeyword] = useState("");
+  const filterNote = keyword => {
+    setKeyword(keyword);
+    if (keyword) {
+      const temp = filterednotes.filter(item => item.title.includes(keyword) || item.content.includes(keyword));
+      setFilterednotes(temp);
+    } else {
+      setFilterednotes(notes);
+    }
+  };
   return (
     <div className="note-list">
-      <input type="text" placeholder="Search Note..." value="" />
-      <div className="note-list-item">
-        <h4>Javascipt fundamental</h4>
-        <span>After resolving all sds ..</span>
-      </div>
+      <input type="text" placeholder="Search Note..." value={keyword} onChange={e => filterNote(e.target.value)} />
+      {filterednotes.map((item, index) => (
+        <div key={index} className="note-list-item">
+          <h4>{item.title}</h4>
+          <span>{item.content.substring(0, 30)}</span>
+        </div>
+      ))}
     </div>
   );
 };
