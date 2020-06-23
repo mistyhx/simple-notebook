@@ -9,10 +9,25 @@
 .note {
   height: 80%;
   width: 80%;
+  position: relative;
   border-radius: 1rem;
   background-color: #fffaf0;
   box-shadow: 0px 20px 40px 5px rgba(0, 0, 0, 0.2);
   display: grid;
   grid-template-areas: "sidebar main main main main main main main main main main main";
   overflow: hidden;
+}
+
+.button-add {
+  position: absolute;
+  z-index: 99;
+  bottom: 2rem;
+  left: 2rem;
+  background-color: #1c1c1c;
+  border-radius: 100px;
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
+  color: white;
 }
