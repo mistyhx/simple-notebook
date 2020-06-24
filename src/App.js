@@ -33,9 +33,15 @@ function App() {
     }
   };
 
-  const updateNote = note => {
+  const updateContent = note => {
     const temp = [...notes];
-    temp[noteIndex] = note;
+    temp[noteIndex].content = note;
+    setNotes(temp);
+  };
+
+  const updateTitle = title => {
+    const temp = [...notes];
+    temp[noteIndex].title = title;
     setNotes(temp);
   };
 
@@ -46,7 +52,12 @@ function App() {
       </div>
       <div className="note">
         <NoteList notes={notes} noteIndex={noteIndex} onSelect={index => setNoteIndex(index)} />
-        <NoteEditor note={notes[noteIndex]} onDelete={() => deleteNote(noteIndex)} />
+        <NoteEditor
+          note={notes[noteIndex]}
+          onUpdateContent={note => updateContent(note)}
+          onUpdateTitle={title => updateTitle(title)}
+          onDelete={() => deleteNote(noteIndex)}
+        />
         <div className="button-add" onClick={() => newNote()}>
           <Plus size={36} />
         </div>
