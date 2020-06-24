@@ -17,7 +17,7 @@ function App() {
 
   const newNote = () => {
     const temp = [...notes];
-    const newNote = { title: "Title", content: "Write your notes" };
+    const newNote = { title: "New Title", content: "Write your notes" };
     temp.push(newNote);
     setNotes(temp);
     console.log(temp.length);
