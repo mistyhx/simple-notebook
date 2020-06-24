@@ -20,6 +20,8 @@ function App() {
     const newNote = { title: "Title", content: "Write your notes" };
     temp.push(newNote);
     setNotes(temp);
+    console.log(temp.length);
+    setNoteIndex(temp.length - 1);
   };
 
   const deleteNote = index => {
