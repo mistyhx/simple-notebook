@@ -14,18 +14,18 @@ const NoteEditor = ({ note, onDelete }) => {
   return (
     <div className="note-editor">
       {edit ? (
-        <div>
-          <div>
+        <div className="editing">
+          <div className="title-editing">
             <input value={title} onChange={e => setTitle(e.target.value)} />
           </div>
-          <div>
+          <div className="content-editing">
             <textarea defaultValue={content} onChange={e => setContent(e.target.value)} />
           </div>
         </div>
       ) : (
-        <div>
-          <h1>{note.title}</h1>
-          <div>{unified().use(parse).use(remark2react).processSync(content).result}</div>
+        <div className="reading">
+          <div className="title">{note.title}</div>
+          <div className="content">{unified().use(parse).use(remark2react).processSync(content).result}</div>
         </div>
       )}
       <div className="note-editor-footer">
