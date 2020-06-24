@@ -17,7 +17,7 @@ function App() {
 
   const newNote = () => {
     const temp = [...notes];
-    const newNote = { title: "Title", content: "" };
+    const newNote = { title: "Title", content: "Write your notes" };
     temp.push(newNote);
     setNotes(temp);
   };
@@ -26,6 +26,12 @@ function App() {
     const temp = [...notes];
     temp.splice(index, 1);
     console.log(temp);
+    setNotes(temp);
+  };
+
+  const updateNote = note => {
+    const temp = [...notes];
+    temp[noteIndex] = note;
     setNotes(temp);
   };
 
