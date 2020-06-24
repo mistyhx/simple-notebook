@@ -8,8 +8,10 @@ function App() {
   const initialState = JSON.parse(window.localStorage.getItem("notes")) || [
     { title: "Tutorial", content: "You can write your own markdown and the browser will remember" },
   ];
+  const [keyword, setKeyword] = useState("");
   const [notes, setNotes] = useState(initialState);
   const [noteIndex, setNoteIndex] = useState(0);
+  const [filterednotes, setFilterednotes] = useState(notes);
 
   useEffect(() => {
     window.localStorage.setItem("notes", JSON.stringify(notes));
@@ -20,7 +22,7 @@ function App() {
     const newNote = { title: "New Title", content: "Write your notes" };
     temp.push(newNote);
     setNotes(temp);
-    console.log(temp.length);
+    setFilterednotes(temp);
     setNoteIndex(temp.length - 1);
   };
 
@@ -28,6 +30,7 @@ function App() {
     const temp = [...notes];
     temp.splice(index, 1);
     setNotes(temp);
+    setFilterednotes(temp);
     if (index > 0) {
       setNoteIndex(noteIndex - 1);
     }
@@ -37,12 +40,28 @@ function App() {
     const temp = [...notes];
     temp[noteIndex].content = note;
     setNotes(temp);
+    setFilterednotes(temp);
   };
 
   const updateTitle = title => {
     const temp = [...notes];
     temp[noteIndex].title = title;
     setNotes(temp);
+    setFilterednotes(temp);
+  };
+
+  const filterNotes = keyword => {
+    setKeyword(keyword);
+    if (keyword) {
+      const temp = filterednotes.filter(
+        item =>
+          item.title.toLowerCase().includes(keyword.toLowerCase()) ||
+          item.content.toLowerCase().includes(keyword.toLowerCase())
+      );
+      setFilterednotes(temp);
+    } else {
+      setFilterednotes(notes);
+    }
   };
 
   return (
@@ -51,7 +70,13 @@ function App() {
         <Book size={24} /> <span className="logo-name">SIMPLE NOTE</span>
       </div>
       <div className="note">
-        <NoteList notes={notes} noteIndex={noteIndex} onSelect={index => setNoteIndex(index)} />
+        <NoteList
+          keyword={keyword}
+          notes={filterednotes}
+          noteIndex={noteIndex}
+          onSelect={index => setNoteIndex(index)}
+          onFilter={value => filterNotes(value)}
+        />
         <NoteEditor
           note={notes[noteIndex]}
           onUpdateContent={note => updateContent(note)}

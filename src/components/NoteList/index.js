@@ -1,20 +1,7 @@
 import React, { useState } from "react";
 import "./index.css";
 
-const NoteList = ({ notes, onSelect, noteIndex }) => {
-  const [filterednotes, setFilterednotes] = useState(notes);
-  const [keyword, setKeyword] = useState("");
-
-  const filterNote = keyword => {
-    setKeyword(keyword);
-    if (keyword) {
-      const temp = filterednotes.filter(item => item.title.includes(keyword) || item.content.includes(keyword));
-      setFilterednotes(temp);
-    } else {
-      setFilterednotes(notes);
-    }
-  };
-
+const NoteList = ({ notes, onSelect, noteIndex, keyword, onFilter }) => {
   return (
     <div className="sidebar">
       <div className="search">
@@ -22,7 +9,7 @@ const NoteList = ({ notes, onSelect, noteIndex }) => {
           type="text"
           placeholder={`Search ${notes.length} notes...`}
           value={keyword}
-          onChange={e => filterNote(e.target.value)}
+          onChange={e => onFilter(e.target.value)}
         />
       </div>
       <div className="note-list">
