@@ -6,19 +6,18 @@ import "./App.css";
 
 function App() {
   const initialState = JSON.parse(window.localStorage.getItem("notes")) || [
-    { createdOn: new Date(), title: "Drat", content: "draft", edit: false },
+    { title: "Tutorial", content: "You can write your own markdown and the browser will remember" },
   ];
   const [notes, setNotes] = useState(initialState);
   const [noteIndex, setNoteIndex] = useState(0);
 
   useEffect(() => {
     window.localStorage.setItem("notes", JSON.stringify(notes));
-    console.log(window.localStorage);
   }, [notes]);
 
   const newNote = () => {
     const temp = [...notes];
-    const newNote = { createdOn: new Date(), title: "New note", content: "new note", edit: false };
+    const newNote = { title: "Title", content: "" };
     temp.push(newNote);
     setNotes(temp);
   };

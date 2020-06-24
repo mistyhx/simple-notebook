@@ -22,7 +22,7 @@ const NoteList = ({ notes, onSelect }) => {
         value={keyword}
         onChange={e => filterNote(e.target.value)}
       />
-      {filterednotes.map((item, index) => (
+      {notes.map((item, index) => (
         <div key={index} className="note-list-item" onClick={() => onSelect(index)}>
           <h4>{item.title}</h4>
           <span>{item.content.substring(0, 30)}</span>
