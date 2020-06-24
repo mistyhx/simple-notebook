@@ -25,8 +25,10 @@ function App() {
   const deleteNote = index => {
     const temp = [...notes];
     temp.splice(index, 1);
-    console.log(temp);
     setNotes(temp);
+    if (index > 0) {
+      setNoteIndex(noteIndex - 1);
+    }
   };
 
   const updateNote = note => {
