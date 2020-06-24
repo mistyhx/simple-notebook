@@ -43,7 +43,7 @@ function App() {
         <Book size={24} /> <span className="logo-name">SIMPLE NOTE</span>
       </div>
       <div className="note">
-        <NoteList notes={notes} onSelect={index => setNoteIndex(index)} />
+        <NoteList notes={notes} noteIndex={noteIndex} onSelect={index => setNoteIndex(index)} />
         <NoteEditor note={notes[noteIndex]} onDelete={() => deleteNote(noteIndex)} />
         <div className="button-add" onClick={() => newNote()}>
           <Plus size={36} />
