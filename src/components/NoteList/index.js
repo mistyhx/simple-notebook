@@ -16,7 +16,12 @@ const NoteList = ({ notes, onSelect }) => {
 
   return (
     <div className="note-list">
-      <input type="text" placeholder="Search Note..." value={keyword} onChange={e => filterNote(e.target.value)} />
+      <input
+        type="text"
+        placeholder={`Search ${notes.length} notes...`}
+        value={keyword}
+        onChange={e => filterNote(e.target.value)}
+      />
       {filterednotes.map((item, index) => (
         <div key={index} className="note-list-item" onClick={() => onSelect(index)}>
           <h4>{item.title}</h4>

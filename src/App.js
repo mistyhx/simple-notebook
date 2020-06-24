@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Plus } from "react-feather";
+import { Plus, Book } from "react-feather";
 import NoteList from "./components/NoteList";
 import NoteEditor from "./components/NoteEditor";
 import "./App.css";
@@ -32,6 +32,9 @@ function App() {
 
   return (
     <div className="App">
+      <div className="logo">
+        <Book size={24} /> <span className="logo-name">SIMPLE NOTE</span>
+      </div>
       <div className="note">
         <NoteList notes={notes} onSelect={index => setNoteIndex(index)} />
         <NoteEditor note={notes[noteIndex]} onDelete={() => deleteNote(noteIndex)} />
@@ -39,6 +42,10 @@ function App() {
           <Plus size={36} />
         </div>
       </div>
+
+      <svg className="illustration" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none">
+        <polygon fill="#fffaf0" points="0,100 100,0 100,100" />
+      </svg>
     </div>
   );
 }

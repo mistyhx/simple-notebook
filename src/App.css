@@ -1,11 +1,33 @@
 .App {
   height: 100vh;
+  position: relative;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   background-color: #f4e9e2;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
     "Droid Sans", "Helvetica Neue", sans-serif;
+}
+
+.logo {
+  position: absolute;
+  top: 2rem;
+  right: 4rem;
+  z-index: 2;
+}
+
+.logo-name {
+  font-weight: 600;
+  vertical-align: top;
+  font-size: 1.3rem;
+  margin-left: 0.5rem;
+  opacity: 0.8;
+}
+
+.illustration {
+  position: absolute;
+  bottom: 0;
 }
 
 .note {
@@ -19,6 +41,7 @@
   grid-template-areas: "sidebar main main main";
   grid-template-columns: repeat(4, 1fr);
   overflow: hidden;
+  z-index: 2;
 }
 
 .button-add {
