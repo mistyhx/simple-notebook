@@ -1,18 +1,20 @@
 .note-editor {
   padding: 2rem;
   grid-area: main;
-  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: space-between;
 }
 
 .note-editor-footer {
-  position: absolute;
   bottom: 1rem;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   border-top: 1px rgba(0, 0, 0, 0.1) solid;
   padding-top: 1rem;
-  width: 90%;
+  width: 100%;
   opacity: 0.6;
 }
 
@@ -23,4 +25,74 @@
 
 .action-button-icon:hover {
   opacity: 0.6;
+}
+.reading {
+  height: 100%;
+  position: relative;
+}
+
+.reading .content {
+  overflow-y: scroll;
+  position: absolute;
+  top: 2.5rem;
+  bottom: 0;
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+.editing {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.title-editing input {
+  font-size: 2rem;
+  font-weight: 600;
+  border: none;
+  background-color: transparent;
+  width: 100%;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
+    "Droid Sans", "Helvetica Neue", sans-serif;
+}
+
+.title-editing input:focus {
+  outline: 0px;
+  outline-offset: 0px;
+}
+
+.content-editing {
+  height: 100%;
+}
+.content-editing textarea {
+  width: 100%;
+  height: 94%;
+  line-height: 1.6rem;
+  margin: 1rem 0;
+  font-size: 1rem;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
+    "Droid Sans", "Helvetica Neue", sans-serif;
+  border: none;
+  background-color: transparent;
+  resize: none;
+}
+
+.content-editing textarea:focus {
+  outline: 0px;
+  outline-offset: 0px;
+}
+
+code {
+  background-color: #32323c;
+  border-radius: 0.2rem;
+  padding: 0.2rem 1rem;
+  margin: 1rem 0;
+  color: #fff;
+}
+
+p {
+  line-height: 1.6rem;
 }

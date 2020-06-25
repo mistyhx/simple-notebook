@@ -1,44 +1,116 @@
 import React, { useState, useEffect } from "react";
-import { Plus } from "react-feather";
+import { Plus, Book } from "react-feather";
 import NoteList from "./components/NoteList";
 import NoteEditor from "./components/NoteEditor";
 import "./App.css";
 
 function App() {
-  const initialState = JSON.parse(window.localStorage.getItem("notes")) || [
-    { createdOn: new Date(), title: "Drat", content: "draft", edit: false },
+  const defaultNote = [
+    {
+      title: "Welcome",
+      content: "This is a simple notebook for markdowns, double click or hit the edit button to start writing",
+    },
   ];
+  const initialState = JSON.parse(window.localStorage.getItem("notes")) || defaultNote;
+  const [edit, setEdit] = useState(false);
+  const [keyword, setKeyword] = useState("");
   const [notes, setNotes] = useState(initialState);
   const [noteIndex, setNoteIndex] = useState(0);
+  const [filterednotes, setFilterednotes] = useState(notes);
 
   useEffect(() => {
     window.localStorage.setItem("notes", JSON.stringify(notes));
-    console.log(window.localStorage);
   }, [notes]);
 
   const newNote = () => {
     const temp = [...notes];
-    const newNote = { createdOn: new Date(), title: "New note", content: "new note", edit: false };
+    const newNote = { title: "New Title", content: "Write your markdown" };
     temp.push(newNote);
     setNotes(temp);
+    setFilterednotes(temp);
+    setNoteIndex(temp.length - 1);
+    setEdit(false);
   };
 
   const deleteNote = index => {
     const temp = [...notes];
-    temp.splice(index, 1);
-    console.log(temp);
+    if (temp.length - 1 > 0) {
+      temp.splice(index, 1);
+      setNotes(temp);
+      setFilterednotes(temp);
+      if (index > 0) {
+        setNoteIndex(noteIndex - 1);
+      }
+    } else {
+      setNotes(defaultNote);
+      setFilterednotes(defaultNote);
+    }
+    setEdit(false);
+  };
+
+  const updateContent = note => {
+    const temp = [...notes];
+    temp[noteIndex].content = note;
     setNotes(temp);
+    setFilterednotes(temp);
+  };
+
+  const updateTitle = title => {
+    const temp = [...notes];
+    temp[noteIndex].title = title;
+    setNotes(temp);
+    setFilterednotes(temp);
+  };
+
+  const selectNote = index => {
+    setNoteIndex(index);
+    setEdit(false);
+  };
+
+  const filterNotes = keyword => {
+    setKeyword(keyword);
+    if (keyword) {
+      const temp = filterednotes.filter(
+        item =>
+          item.title.toLowerCase().includes(keyword.toLowerCase()) ||
+          item.content.toLowerCase().includes(keyword.toLowerCase())
+      );
+      setFilterednotes(temp);
+    } else {
+      setFilterednotes(notes);
+    }
   };
 
   return (
     <div className="App">
+      <div className="logo">
+        <Book size={24} /> <span className="logo-name">SIMPLE NOTE</span>
+      </div>
       <div className="note">
-        <NoteList notes={notes} onSelect={index => setNoteIndex(index)} />
-        <NoteEditor note={notes[noteIndex]} onDelete={() => deleteNote(noteIndex)} />
+        <NoteList
+          keyword={keyword}
+          notes={filterednotes}
+          noteIndex={noteIndex}
+          onSelect={index => selectNote(index)}
+          onFilter={value => filterNotes(value)}
+        />
+        <NoteEditor
+          note={notes[noteIndex]}
+          edit={edit}
+          onUpdateContent={note => updateContent(note)}
+          onUpdateTitle={title => updateTitle(title)}
+          onDelete={() => deleteNote(noteIndex)}
+          onToggleEditing={() => setEdit(!edit)}
+          onClickContent={() => setEdit(true)}
+        />
         <div className="button-add" onClick={() => newNote()}>
           <Plus size={36} />
         </div>
       </div>
+
+      <svg className="illustration" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none">
+        <polygon fill="#fffaf0" points="0,100 100,0 100,100" />
+      </svg>
     </div>
   );
 }
