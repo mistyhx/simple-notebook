@@ -5,8 +5,7 @@ import remark2react from "remark-react";
 import { Trash, Edit } from "react-feather";
 import "./index.css";
 
-const NoteEditor = ({ note, onDelete, onUpdateContent, onUpdateTitle }) => {
-  const [edit, setEdit] = useState(false);
+const NoteEditor = ({ note, onDelete, onUpdateContent, onUpdateTitle, onToggleEditing, onClickContent, edit }) => {
   return (
     <div className="note-editor">
       {edit ? (
@@ -19,7 +18,7 @@ const NoteEditor = ({ note, onDelete, onUpdateContent, onUpdateTitle }) => {
           </div>
         </div>
       ) : (
-        <div className="reading" onDoubleClick={() => setEdit(true)}>
+        <div className="reading" onDoubleClick={() => onToggleEditing()}>
           <div className="title">{note.title}</div>
           <div className="content">{unified().use(parse).use(remark2react).processSync(note.content).result}</div>
         </div>
@@ -31,7 +30,7 @@ const NoteEditor = ({ note, onDelete, onUpdateContent, onUpdateTitle }) => {
             className="action-button-icon"
             size={18}
             color={edit ? `#712d25` : `#000`}
-            onClick={() => setEdit(!edit)}
+            onClick={() => onToggleEditing()}
           />
           <Trash className="action-button-icon" size={18} onClick={() => onDelete()} />
         </div>

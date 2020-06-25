@@ -7,6 +7,7 @@ import "./App.css";
 function App() {
   const defaultNote = [{ title: "Welcome", content: "This is a simple notebook for markdowns" }];
   const initialState = JSON.parse(window.localStorage.getItem("notes")) || defaultNote;
+  const [edit, setEdit] = useState(false);
   const [keyword, setKeyword] = useState("");
   const [notes, setNotes] = useState(initialState);
   const [noteIndex, setNoteIndex] = useState(0);
@@ -23,12 +24,11 @@ function App() {
     setNotes(temp);
     setFilterednotes(temp);
     setNoteIndex(temp.length - 1);
+    setEdit(false);
   };
 
   const deleteNote = index => {
     const temp = [...notes];
-    console.log(temp);
-    console.log(temp.length);
     if (temp.length - 1 > 0) {
       temp.splice(index, 1);
       setNotes(temp);
@@ -40,6 +40,7 @@ function App() {
       setNotes(defaultNote);
       setFilterednotes(defaultNote);
     }
+    setEdit(false);
   };
 
   const updateContent = note => {
@@ -54,6 +55,11 @@ function App() {
     temp[noteIndex].title = title;
     setNotes(temp);
     setFilterednotes(temp);
+  };
+
+  const selectNote = index => {
+    setNoteIndex(index);
+    setEdit(false);
   };
 
   const filterNotes = keyword => {
@@ -80,14 +86,17 @@ function App() {
           keyword={keyword}
           notes={filterednotes}
           noteIndex={noteIndex}
-          onSelect={index => setNoteIndex(index)}
+          onSelect={index => selectNote(index)}
           onFilter={value => filterNotes(value)}
         />
         <NoteEditor
           note={notes[noteIndex]}
+          edit={edit}
           onUpdateContent={note => updateContent(note)}
           onUpdateTitle={title => updateTitle(title)}
           onDelete={() => deleteNote(noteIndex)}
+          onToggleEditing={() => setEdit(!edit)}
+          onClickContent={() => setEdit(true)}
         />
         <div className="button-add" onClick={() => newNote()}>
           <Plus size={36} />
