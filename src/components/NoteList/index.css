@@ -2,7 +2,7 @@
   grid-area: sidebar;
   background-color: #32323c;
   color: #fff;
-  overflow: scroll;
+  position: relative;
 }
 
 .search {
@@ -29,6 +29,15 @@
 
 .sidebar input::selection {
   background-color: #f4e9e2;
+}
+
+.note-list {
+  position: absolute;
+  top: 6rem;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  overflow: scroll;
 }
 
 .note-list-item {
