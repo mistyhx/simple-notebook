@@ -25,9 +25,14 @@ const NoteEditor = ({ note, onDelete, onUpdateContent, onUpdateTitle }) => {
         </div>
       )}
       <div className="note-editor-footer">
-        <div className="date">Date</div>
+        <div className="date"></div>
         <div className="action-buttons">
-          <Edit className="action-button-icon" size={18} onClick={() => setEdit(!edit)} />
+          <Edit
+            className="action-button-icon"
+            size={18}
+            color={edit ? `#712d25` : `#000`}
+            onClick={() => setEdit(!edit)}
+          />
           <Trash className="action-button-icon" size={18} onClick={() => onDelete()} />
         </div>
       </div>

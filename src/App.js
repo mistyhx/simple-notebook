@@ -5,7 +5,7 @@ import NoteEditor from "./components/NoteEditor";
 import "./App.css";
 
 function App() {
-  const defaultNote = [{ title: "Tutorial", content: "You can write your own markdown and the browser will remember" }];
+  const defaultNote = [{ title: "Welcome", content: "This is a simple notebook for markdowns" }];
   const initialState = JSON.parse(window.localStorage.getItem("notes")) || defaultNote;
   const [keyword, setKeyword] = useState("");
   const [notes, setNotes] = useState(initialState);
@@ -18,7 +18,7 @@ function App() {
 
   const newNote = () => {
     const temp = [...notes];
-    const newNote = { title: "New Title", content: "Write your notes" };
+    const newNote = { title: "New Title", content: "Write your markdown" };
     temp.push(newNote);
     setNotes(temp);
     setFilterednotes(temp);
