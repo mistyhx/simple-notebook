@@ -19,13 +19,13 @@ const NoteEditor = ({ note, onDelete, onUpdateContent, onUpdateTitle }) => {
           </div>
         </div>
       ) : (
-        <div className="reading">
+        <div className="reading" onDoubleClick={() => setEdit(true)}>
           <div className="title">{note.title}</div>
           <div className="content">{unified().use(parse).use(remark2react).processSync(note.content).result}</div>
         </div>
       )}
       <div className="note-editor-footer">
-        <div className="date"></div>
+        <div className="view">{edit ? "Editing Mode" : "View Mode"}</div>
         <div className="action-buttons">
           <Edit
             className="action-button-icon"
