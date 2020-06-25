@@ -5,9 +5,8 @@ import NoteEditor from "./components/NoteEditor";
 import "./App.css";
 
 function App() {
-  const initialState = JSON.parse(window.localStorage.getItem("notes")) || [
-    { title: "Tutorial", content: "You can write your own markdown and the browser will remember" },
-  ];
+  const defaultNote = [{ title: "Tutorial", content: "You can write your own markdown and the browser will remember" }];
+  const initialState = JSON.parse(window.localStorage.getItem("notes")) || defaultNote;
   const [keyword, setKeyword] = useState("");
   const [notes, setNotes] = useState(initialState);
   const [noteIndex, setNoteIndex] = useState(0);
@@ -28,11 +27,18 @@ function App() {
 
   const deleteNote = index => {
     const temp = [...notes];
-    temp.splice(index, 1);
-    setNotes(temp);
-    setFilterednotes(temp);
-    if (index > 0) {
-      setNoteIndex(noteIndex - 1);
+    console.log(temp);
+    console.log(temp.length);
+    if (temp.length - 1 > 0) {
+      temp.splice(index, 1);
+      setNotes(temp);
+      setFilterednotes(temp);
+      if (index > 0) {
+        setNoteIndex(noteIndex - 1);
+      }
+    } else {
+      setNotes(defaultNote);
+      setFilterednotes(defaultNote);
     }
   };
 
