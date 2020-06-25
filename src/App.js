@@ -5,7 +5,12 @@ import NoteEditor from "./components/NoteEditor";
 import "./App.css";
 
 function App() {
-  const defaultNote = [{ title: "Welcome", content: "This is a simple notebook for markdowns" }];
+  const defaultNote = [
+    {
+      title: "Welcome",
+      content: "This is a simple notebook for markdowns, double click or hit the edit button to start writing",
+    },
+  ];
   const initialState = JSON.parse(window.localStorage.getItem("notes")) || defaultNote;
   const [edit, setEdit] = useState(false);
   const [keyword, setKeyword] = useState("");
